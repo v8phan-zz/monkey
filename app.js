@@ -1,58 +1,23 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const app = express();
+const port = process.env.PORT || 3000;
 
 const db = require("./config/database");
 const { nextTick } = require("process");
-console.log(db);
+const User = require("./models/User")
 
 //test database
 db.authenticate()
   .then(() => console.log("Database connected..."))
   .catch((err) => console.log("Error: " + err));
 
-// async function createDatabase() {
-//   try {
-//     const test = await db.query(
-//       "CREATE TABLE users (id MEDIUMINT NOT NULL AUTO_INCREMENT, name CHAR(30) NOT NULL, PRIMARY KEY (id))"
-//     );
-//     console.log(test);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
+console.log(db);
 
-//createDatabase();
+User.sync({ force: true });
+  console.log("The table for the model was just (re)created!");
 
-// try {
-//   const test = db.query(
-//     "CREATE TABLE users (id MEDIUMINT NOT NULL AUTO_INCREMENT, name CHAR(30) NOT NULL, PRIMARY KEY (id))"
-//   );
-//   console.log(test);
-// } catch (err) {
-//   console.log(err);
-// }
-
-// db.query(
-//   "CREATE TABLE users (name VARCHAR(255), address VARCHAR(255))",
-//   function (err, result) {
-//     try {
-//       console.log("Result: " + result)
-//     } catch (err) {
-//       console.err(err)
-//     }
-//   }
-
-// function (err, result) {
-//   if (err) {
-//     console.log(err.message);
-//   }
-//   console.log("Result: " + result);
-// }
-// );
-
-const app = express();
-const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -70,3 +35,5 @@ app.get("/", function () {
   res.writeHead(200);
   res.end();
 });
+
+app.use('/login', require('./routes/login'));
