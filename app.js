@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 
 const db = require("./config/database");
 const { nextTick } = require("process");
-const User = require("./models/User")
+//const User = require("./models/User")
 
 //test database
 db.authenticate()
@@ -15,9 +15,10 @@ db.authenticate()
 
 console.log(db);
 
-User.sync({ force: true });
+db.sync();
   console.log("The table for the model was just (re)created!");
 
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -37,3 +38,4 @@ app.get("/", function () {
 });
 
 app.use('/login', require('./routes/login'));
+app.use('/signup', require('./routes/signup'));
