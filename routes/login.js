@@ -8,7 +8,7 @@ const User = require('../models/User');
 router.post('/', async (req, res) => {
   // const email = req.body.email;
   const password = req.body.password;
-  console.log(password);
+  // console.log(password);
 
   console.log("req", req.body);
   // looking for user in database given email
@@ -28,17 +28,7 @@ router.post('/', async (req, res) => {
     // retrieve hashed password and compare to encrypted password used to log in
     const comparison = await bcrypt.compare(
       password,
-      userResult[0].password,
-      function (err, res) {
-        if (err) {
-          console.log(err);
-        }
-        if (res) {
-          console.log(res);
-        } else {
-          console.log("no match");
-        }
-      }
+      userResult.password,
     );
     if (comparison) {
       res.json({ id: userResult.id });

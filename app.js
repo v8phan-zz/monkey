@@ -28,14 +28,14 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
-app.post('/', function () {
-  console.log('this is a POST');
-});
-app.get('/', function () {
-  console.log("this is a GET");
-  res.writeHead(200);
-  res.end();
-});
+// app.post('/', function () {
+//   console.log('this is a POST');
+// });
+// app.get('/', function () {
+//   console.log('this is a GET');
+//   res.writeHead(200);
+//   res.end();
+// });
 
 app.use('/login', require('./routes/login'));
 app.use('/signup', require('./routes/signup'));
