@@ -1,11 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const port = process.env.PORT || 3001;
+const { nextTick } = require('process');
+const pino = require('express-pino-logger')();
+
 const app = express();
-const port = process.env.PORT || 3000;
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(pino);
 
 const db = require('./config/database');
-const { nextTick } = require('process');
 // const User = require("./models/User")
 
 // test database
@@ -20,9 +24,22 @@ console.log('The table for the model was just (re)created!');
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+// app.post('/api/login', (req, res) => {
+//   console.log(req.body);
+//   res.send({ greeting: `EMAIL = ${req.body.email}, PASS = ${req.body.password}` });
+// });
+
+// app.get('/', (req, res) => {
+//   res.send(JSON.stringify({ greeting: `Hello ${req.body.email}!` }));
+
+//   res.send('Hello Wdfsdforld!');
+// });
+
+// app.get('/login', (req, res) => {
+//   const email = req.query.email || 'Wofdfdfrld';
+//   res.setHeader('Content-Type', 'application/json');
+//   res.send(JSON.stringify({ greeting: `Hello ${email}!` }));
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

@@ -1,16 +1,17 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const app = express();
 
 const router = express.Router();
 // const db = require('../config/database');
 const User = require('../models/User');
 
-router.post('/', async (req, res) => {
+router.post('/login', async (req, res) => {
   // const email = req.body.email;
   const password = req.body.password;
   // console.log(password);
 
-  console.log("req", req.body);
+  console.log('req', req.body);
   // looking for user in database given email
   const body = req.body;
   const result = await User.findAll({
@@ -40,5 +41,6 @@ router.post('/', async (req, res) => {
     res.send('user not found');
   }
 });
+app.use('/api', router);
 
 module.exports = router;
