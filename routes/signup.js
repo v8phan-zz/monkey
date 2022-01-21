@@ -5,7 +5,7 @@ const db = require('../config/database');
 const User = require('../models/User');
 const saltRounds = 10;
 
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
   // check if request exists in table
   const result = await User.findAll({
     where: { email: req.body.email },
@@ -20,6 +20,8 @@ router.post('/', async (req, res) => {
     });
     // console.log("userResult", userResult)
     console.log('user already exists');
+    res.sendStatus(400);
+    //res.json({ message: 'User already exists' });
 
     // add user if userResult exists
   } else {
@@ -34,10 +36,12 @@ router.post('/', async (req, res) => {
 
     console.log(user);
     console.log('user added');
+    res.sendStatus(200);
+    //res.json({ message: 'User added' });
   }
   console.log('req', req.body);
 
-  res.send('signup');
+  //res.send('signup');
 });
 
 module.exports = router;

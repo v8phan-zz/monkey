@@ -54,5 +54,5 @@ app.listen(port, () => {
 //   res.end();
 // });
 
-app.use('/login', require('./routes/login'));
-app.use('/signup', require('./routes/signup'));
+app.use('/api', require('./routes/login'));
+app.use('/api', require('./routes/signup'));

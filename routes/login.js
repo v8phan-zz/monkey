@@ -7,11 +7,8 @@ const router = express.Router();
 const User = require('../models/User');
 
 router.post('/login', async (req, res) => {
-  // const email = req.body.email;
   const password = req.body.password;
-  // console.log(password);
-
-  console.log('req', req.body);
+  console.log("req", req.body);
   // looking for user in database given email
   const body = req.body;
   const result = await User.findAll({
@@ -27,20 +24,21 @@ router.post('/login', async (req, res) => {
       userResult = user.dataValues;
     });
     // retrieve hashed password and compare to encrypted password used to log in
-    const comparison = await bcrypt.compare(
-      password,
-      userResult.password,
-    );
+    const comparison = await bcrypt.compare(password, userResult.password);
     if (comparison) {
-      res.json({ id: userResult.id });
+      res.sendStatus(200);
+      //res.send({ id: userResult.id, message: 'valid password' });
       console.log('valid password');
     } else {
-      res.send('wrong pw');
+      res.sendStatus(400);
+      //res.send({ message: 'wrong password' });
+      console.log('wrong password');
     }
   } else {
-    res.send('user not found');
+    res.sendStatus(400);
+    console.log('user not found');
+    //res.send({ message: 'user not found' });
   }
 });
-app.use('/api', router);
 
 module.exports = router;
