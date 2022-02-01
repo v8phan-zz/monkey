@@ -1,12 +1,12 @@
-const express = require('express');
-const bcrypt = require('bcrypt');
+const express = require("express");
+const bcrypt = require("bcrypt");
 const app = express();
 
 const router = express.Router();
 // const db = require('../config/database');
-const User = require('../models/User');
+const User = require("../models/User");
 
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   const password = req.body.password;
   console.log("req", req.body);
   // looking for user in database given email
@@ -28,15 +28,15 @@ router.post('/login', async (req, res) => {
     if (comparison) {
       res.sendStatus(200);
       //res.send({ id: userResult.id, message: 'valid password' });
-      console.log('valid password');
+      console.log("valid password");
     } else {
       res.sendStatus(400);
       //res.send({ message: 'wrong password' });
-      console.log('wrong password');
+      console.log("wrong password");
     }
   } else {
     res.sendStatus(400);
-    console.log('user not found');
+    console.log("user not found");
     //res.send({ message: 'user not found' });
   }
 });

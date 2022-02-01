@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 const db = require('../config/database');
 
-const User = db.define('user', {
+const User = db.define("user", {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -16,5 +16,11 @@ const User = db.define('user', {
     primaryKey: true,
   },
 });
+
+User.associate = (models) => {
+  User.hasMany(models.Comments, {
+    foreignKey: 'comment_id',
+  });
+};
 
 module.exports = User;
