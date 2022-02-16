@@ -23,21 +23,20 @@ router.post("/login", async (req, res) => {
     result.forEach((user) => {
       userResult = user.dataValues;
     });
+    console.log(userResult);
     // retrieve hashed password and compare to encrypted password used to log in
     const comparison = await bcrypt.compare(password, userResult.password);
     if (comparison) {
-      res.sendStatus(200);
-      //res.send({ id: userResult.id, message: 'valid password' });
+      //res.sendStatus(200);
+      res.send({ user_id: userResult.id });
       console.log("valid password");
     } else {
       res.sendStatus(400);
-      //res.send({ message: 'wrong password' });
       console.log("wrong password");
     }
   } else {
     res.sendStatus(400);
     console.log("user not found");
-    //res.send({ message: 'user not found' });
   }
 });
 

@@ -15,6 +15,9 @@ const User = db.define("user", {
     autoIncrement: true,
     primaryKey: true,
   },
+  testcolumn: {
+    type: Sequelize.INTEGER,
+  },
 });
 
 User.associate = (models) => {

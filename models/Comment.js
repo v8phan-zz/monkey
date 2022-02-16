@@ -7,11 +7,9 @@ const Comment = db.define("comment", {
   },
   blog_id: {
     type: Sequelize.INTEGER,
-    autoIncrement: true,
   },
   user_id: {
     type: Sequelize.INTEGER,
-    autoIncrement: true,
   },
   id: {
     type: Sequelize.INTEGER,

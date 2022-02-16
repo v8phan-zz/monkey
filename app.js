@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(pino);
 
 const db = require('./config/database');
-//const Comments = require("./models/Comment")
+const User = require("./models/User");
+const Comment = require("./models/Comment");
 
 // test database
 db.authenticate()
@@ -30,3 +31,4 @@ app.listen(port, () => {
 
 app.use('/api', require('./routes/login'));
 app.use('/api', require('./routes/signup'));
+app.use('/api', require('./routes/postcomment'));
