@@ -32,3 +32,4 @@ app.listen(port, () => {
 app.use('/api', require('./routes/login'));
 app.use('/api', require('./routes/signup'));
 app.use('/api', require('./routes/postcomment'));
+app.use('/api', require('./routes/displaycomment'));

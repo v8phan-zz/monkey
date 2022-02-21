@@ -23,7 +23,7 @@ router.post("/login", async (req, res) => {
     result.forEach((user) => {
       userResult = user.dataValues;
     });
-    console.log(userResult);
+    console.log('login.js 26: ', userResult);
     // retrieve hashed password and compare to encrypted password used to log in
     const comparison = await bcrypt.compare(password, userResult.password);
     if (comparison) {
